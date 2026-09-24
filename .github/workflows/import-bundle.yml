@@ -1,0 +1,46 @@
+# Importa um bundle .tar.gz (URL pública + sha256) para a main. Usado pra subir árvores grandes/binárias.
+name: import-bundle
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "URL pública do .tar.gz"
+        required: true
+      sha256:
+        description: "sha256 do .tar.gz"
+        required: true
+      message:
+        description: "mensagem do commit"
+        required: false
+        default: "import bundle"
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Baixar e verificar
+        env:
+          URL: ${{ inputs.url }}
+          SHA: ${{ inputs.sha256 }}
+        run: |
+          curl -fsSL "$URL" -o "$RUNNER_TEMP/b.tgz"
+          echo "$SHA  $RUNNER_TEMP/b.tgz" | sha256sum -c -
+      - name: Substituir árvore (mantém .git e .github)
+        run: |
+          find . -mindepth 1 -maxdepth 1 ! -name .git ! -name .github -exec rm -rf {} +
+          tar -xzf "$RUNNER_TEMP/b.tgz" -C . --exclude='./.github' --exclude='.github'
+      - name: Commit e push
+        env:
+          MSG: ${{ inputs.message }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then echo "nada mudou"; exit 0; fi
+          git commit -m "$MSG"
+          git push origin HEAD:main
+          if git ls-remote --exit-code --heads origin gh-pages >/dev/null; then git push -f origin HEAD:gh-pages; fi
