@@ -1,0 +1,52 @@
+{
+  "sample.mp4": {
+    "duration": 40.0,
+    "windows": [
+      {
+        "start": 1.7,
+        "end": 8.7,
+        "reason": "puxo (movimento vertical)"
+      },
+      {
+        "start": 14.7,
+        "end": 21.7,
+        "reason": "puxo (movimento vertical)"
+      },
+      {
+        "start": 27.7,
+        "end": 34.7,
+        "reason": "puxo (movimento vertical)"
+      }
+    ]
+  },
+  "yellow_portrait.mp4": {
+    "duration": 30.0,
+    "windows": [
+      {
+        "start": 3.59,
+        "end": 10.59,
+        "reason": "puxo (barra amarela)"
+      },
+      {
+        "start": 14.55,
+        "end": 21.55,
+        "reason": "puxo (barra amarela)"
+      }
+    ]
+  },
+  "yellow_rotated.mp4": {
+    "duration": 30.0,
+    "windows": [
+      {
+        "start": 3.59,
+        "end": 10.59,
+        "reason": "puxo (barra amarela)"
+      },
+      {
+        "start": 14.59,
+        "end": 21.59,
+        "reason": "puxo (barra amarela)"
+      }
+    ]
+  }
+}
