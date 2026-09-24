@@ -1,0 +1,18 @@
+{
+  "name": "cortai",
+  "private": true,
+  "type": "module",
+  "description": "Cortaí — corta só o puxo dos vídeos de LPO, 100% no navegador.",
+  "scripts": {
+    "build": "bash tools/build-site.sh _site",
+    "test": "node tests/detector.test.mjs"
+  },
+  "dependencies": {
+    "@ffmpeg/core": "0.12.10",
+    "@ffmpeg/ffmpeg": "0.12.15",
+    "@ffmpeg/util": "0.12.2"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0"
+  }
+}

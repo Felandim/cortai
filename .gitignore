@@ -1,0 +1,28 @@
+# nunca versionar
+.venv/
+__pycache__/
+*.pyc
+node_modules/
+logs/
+*.log
+*.nohup
+LIVE*.txt
+jobs/
+cortai-jobs/
+.env
+.env.*
+*.pem
+*.key
+credentials
+**/.herenow/
+herenow.json
+*claim*.json
+cloudflared
+bin/cloudflared
+tests/fixtures/_*
+.DS_Store
+# gerados no build/CI
+_site/
+/vendor/
+/sample.mp4
+tests/fixtures/*.mp4

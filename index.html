@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Cortaí — corta o puxo</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E%3Crect width=%2216%22 height=%2216%22 rx=%224%22 fill=%22%23f5c518%22/%3E%3C/svg%3E" />
+  <meta name="description" content="Sobe o treino cru. Acha cada levantamento e corta só o puxo." />
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <header class="top">
+    <div class="brand">
+      <span class="mark" aria-hidden="true"></span>
+      <h1>Cortaí</h1>
+    </div>
+    <p class="sub">Sobe o treino cru. Acha cada levantamento e corta só o puxo.</p>
+    <p class="honest">Detecta o puxo pelo movimento da barra (anilha amarela ou movimento vertical). Sem pose/IA de 18 parâmetros.</p>
+    <p class="privacy">🔒 Seus vídeos não saem do seu aparelho: tudo roda aqui no navegador, nada é enviado pra servidor.</p>
+  </header>
+
+  <main>
+    <section class="card drop-card" id="drop-card">
+      <form id="form" class="form">
+        <label class="drop" id="drop" for="file">
+          <input id="file" name="files" type="file" accept="video/mp4,video/webm,video/quicktime,.mp4,.webm,.mov" multiple />
+          <span class="drop-icon" aria-hidden="true">↓</span>
+          <span class="drop-title">Solta um ou vários MP4s do treino</span>
+          <span class="drop-hint">vídeo cru de LPO · MP4, WebM, MOV · até 8 arquivos, até 4 min cada</span>
+          <span class="file-name" id="file-name" hidden></span>
+        </label>
+
+        <div class="actions">
+          <button type="submit" class="btn primary" id="btn-go" disabled>Processar</button>
+          <button type="button" class="btn ghost" id="btn-sample">Testar com treino de exemplo</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="progress-wrap" id="progress-wrap" hidden>
+      <div class="progress-bar"><span id="progress-fill"></span></div>
+      <p class="progress-text" id="progress-text">Preparando…</p>
+    </section>
+
+    <section class="gallery" id="gallery" hidden>
+      <div class="gallery-head">
+        <h2>Levantamentos</h2>
+        <p id="gallery-meta"></p>
+      </div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <p class="err" id="err" hidden></p>
+  </main>
+
+  <footer class="pix">
+    <p class="pix-label">Se o Cortaí te poupou tempo, manda um PIX</p>
+    <div class="pix-row">
+      <code id="pix-key">7a941c50-b79f-4791-a7f4-5fe2a68ffea0</code>
+      <button type="button" class="btn tiny" id="btn-copy-pix">Copiar chave</button>
+    </div>
+    <p class="copied" id="pix-copied" hidden>Chave copiada.</p>
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
