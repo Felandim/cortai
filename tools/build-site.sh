@@ -6,7 +6,7 @@ cd "$(dirname "$0")/.."
 OUT=${1:-_site}
 rm -rf "$OUT"
 mkdir -p "$OUT/vendor/ffmpeg" "$OUT/vendor/util" "$OUT/vendor/core"
-cp index.html .nojekyll "$OUT/"
+cp index.html "$OUT/"
 cp -r css js "$OUT/"
 cp node_modules/@ffmpeg/ffmpeg/dist/esm/*.js "$OUT/vendor/ffmpeg/"
 cp node_modules/@ffmpeg/util/dist/esm/*.js "$OUT/vendor/util/"

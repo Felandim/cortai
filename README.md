@@ -2,6 +2,8 @@
 
 Sobe o treino cru de LPO. Acha cada levantamento e corta só o puxo — clipes verticais 720×1280 (Reels, TikTok, Shorts).
 
+**No ar (URL fixa):** https://oaken-bonnet-2w3v.here.now/
+
 **100% no navegador:** os vídeos não saem do aparelho. Não tem servidor, não tem upload.
 
 ## Como funciona
@@ -32,6 +34,12 @@ npx playwright install chromium
 
 Todo commit em `main` roda `.github/workflows/deploy.yml` (CI): gera fixtures, compara detector JS × Python, faz o build
 (`tools/build-site.sh`: app + ffmpeg.wasm fixo do npm + sample) e roda o e2e headless. O CI não publica nada.
+
+## Publicação
+
+Site estático no here.now (slug permanente `oaken-bonnet-2w3v`, conta autenticada — não expira):
+`bash tools/build-site.sh /tmp/cortai-site` e depois o `publish.sh` do here.now com `--slug oaken-bonnet-2w3v`.
+Credenciais do here.now ficam fora do repositório.
 
 `legacy-server/` guarda a versão antiga (FastAPI + ffmpeg) só como referência do detector — não é mais usada em produção.
 
