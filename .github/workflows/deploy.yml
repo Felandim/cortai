@@ -1,0 +1,46 @@
+# Testa (detector JS vs Python, e2e headless) e publica o site estático na branch gh-pages (GitHub Pages).
+name: deploy
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: ffmpeg + numpy (referência Python)
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          python3 -m pip install --quiet numpy
+      - name: npm install (ffmpeg.wasm fixo)
+        run: npm install --no-audit --no-fund
+      - name: Fixtures + janelas do Python
+        run: python3 tests/make_fixtures.py
+      - name: Teste do detector (JS vs Python)
+        run: node tests/detector.test.mjs
+      - name: Build do site
+        run: bash tools/build-site.sh _site
+      - name: E2E headless (Chromium)
+        run: |
+          npx playwright install --with-deps chromium
+          (cd _site && python3 -m http.server 8099 --bind 127.0.0.1 >/dev/null 2>&1 &)
+          sleep 1
+          CORTAI_URL=http://127.0.0.1:8099/ node tests/e2e.mjs
+      - name: Publicar em gh-pages
+        run: |
+          cd _site
+          git init -q -b gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "deploy ${GITHUB_SHA}"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" gh-pages
