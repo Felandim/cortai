@@ -2,8 +2,6 @@
 
 Sobe o treino cru de LPO. Acha cada levantamento e corta só o puxo — clipes verticais 720×1280 (Reels, TikTok, Shorts).
 
-**No ar (URL fixa):** https://felandim.github.io/cortai/
-
 **100% no navegador:** os vídeos não saem do aparelho. Não tem servidor, não tem upload.
 
 ## Como funciona
@@ -30,11 +28,10 @@ npx playwright install chromium
 (cd _site && python3 -m http.server 8099 &) ; CORTAI_URL=http://127.0.0.1:8099/ node tests/e2e.mjs
 ```
 
-## Deploy
+## CI
 
-Todo commit em `main` roda `.github/workflows/deploy.yml`: gera fixtures, compara detector JS × Python, faz o build
-(`tools/build-site.sh`: app + ffmpeg.wasm fixo do npm + sample), roda e2e headless e publica em `gh-pages`,
-que o GitHub Pages serve em https://felandim.github.io/cortai/. Sem túnel, sem servidor.
+Todo commit em `main` roda `.github/workflows/deploy.yml` (CI): gera fixtures, compara detector JS × Python, faz o build
+(`tools/build-site.sh`: app + ffmpeg.wasm fixo do npm + sample) e roda o e2e headless. O CI não publica nada.
 
 `legacy-server/` guarda a versão antiga (FastAPI + ffmpeg) só como referência do detector — não é mais usada em produção.
 
